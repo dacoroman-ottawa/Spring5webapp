@@ -3,10 +3,14 @@
  */
 package guru.springframework.spring5webapp.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * @author BNeagu
@@ -27,6 +31,9 @@ public class Publisher {
 	private String state;
 	private String country;
 	private String zipcode;
+	
+	@OneToMany
+	private Set<Book> books = new HashSet<>();
 	
 	public Publisher(String name, String address, String city, String state, String country, String zipcode) {
 		this.name = name;
@@ -94,6 +101,16 @@ public class Publisher {
 
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
+	}
+	
+	
+
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
 	}
 
 	@Override

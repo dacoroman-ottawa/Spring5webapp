@@ -47,19 +47,28 @@ public class BootStrapData implements CommandLineRunner {
 		ddd.getAuthors().add(eric);
 		
 		authorRepository.save(eric);
-		bookRepository.save(ddd);
+		bookRepository.save(ddd);	
 		
 		Author rod = new Author("Rod", "Johnson");
 		Book noEJB = new Book ("J2EE Development without EJB", "ABC123123");
 		
 		rod.getBooks().add(noEJB);
 		noEJB.getAuthors().add(rod);
-		
+
 		authorRepository.save(rod);
-		bookRepository.save(noEJB);
+		bookRepository.save(noEJB);	
 		
 		Publisher pinguin = new Publisher("Pinguin Books", "123 Main", "New York", "NY", "USA", "678901-1234");
+		publisherRepository.save(pinguin);
 		
+		ddd.setPublisher(pinguin);
+		noEJB.setPublisher(pinguin);
+			
+		pinguin.getBooks().add(ddd);
+		pinguin.getBooks().add(noEJB);
+		
+		bookRepository.save(ddd);		
+		bookRepository.save(noEJB);		
 		publisherRepository.save(pinguin);
 		
 		
@@ -68,6 +77,7 @@ public class BootStrapData implements CommandLineRunner {
 		System.out.println("Number of authors: " + authorRepository.count());
 		System.out.println("Number of publishers: " + publisherRepository.count());
 		
+		System.out.println("Publisher " + pinguin.getName() + " has " + pinguin.getBooks().size() + " books.");
 		
 	}
 	
